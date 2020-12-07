@@ -120,8 +120,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		$status_display/precision_label/Label.text = "Coarse mode"
 
-	print($sim/capsule.position)
-
 	# game over conditions
 	if game_running:
 		if distance.x < -42 or distance.x > 15 or distance.y > 25 or distance.y < -15:

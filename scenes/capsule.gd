@@ -14,7 +14,12 @@ var velocity: Vector2 = Vector2(0, 0)
 var rot_velocity: float = 0
 var thrust = [Vector3(5, 5, 0.05), Vector3(5, 5, 0.07)]
 
+var thrust_timers = [0, 0, 0, 0]
+
 onready var dock_position = [$dragon/docking_center.position, $starliner/docking_center.position]
+
+onready var thrusters = [[$dragon/sprites/thrustback, $dragon/sprites/thrustdown, $dragon/sprites/thrustforward, $dragon/sprites/thrustup],
+		[$starliner/sprites/thrustback, $starliner/sprites/thrustdown, $starliner/sprites/thrustforward, $starliner/sprites/thrustup]]
 
 func _ready() -> void:
 	set_physics_process(true)
@@ -38,12 +43,16 @@ func _physics_process(delta: float) -> void:
 		if precision_mode:
 			if Input.is_action_just_pressed("thrust_up"):
 				velocity -= Vector2(0, thrust[current_capsule].y).rotated(rotation)
+				thrust_timers[1] = 0.0001
 			if Input.is_action_just_pressed("thrust_down"):
 				velocity += Vector2(0, thrust[current_capsule].y).rotated(rotation)
+				thrust_timers[3] = 0.0001
 			if Input.is_action_just_pressed("thrust_backwards"):
 				velocity -= Vector2(thrust[current_capsule].x, 0).rotated(rotation)
+				thrust_timers[2] = 0.0001
 			if Input.is_action_just_pressed("thrust_forwards"):
 				velocity += Vector2(thrust[current_capsule].x, 0).rotated(rotation)
+				thrust_timers[0] = 0.0001
 			if Input.is_action_just_pressed("thrust_ccw"):
 				rot_velocity -= thrust[current_capsule].z
 			if Input.is_action_just_pressed("thrust_cw"):
@@ -51,16 +60,28 @@ func _physics_process(delta: float) -> void:
 		else:
 			if Input.is_action_pressed("thrust_up"):
 				velocity -= Vector2(0, thrust[current_capsule].y).rotated(rotation)
+				thrust_timers[1] = 0.0001
 			if Input.is_action_pressed("thrust_down"):
 				velocity += Vector2(0, thrust[current_capsule].y).rotated(rotation)
+				thrust_timers[3] = 0.0001
 			if Input.is_action_pressed("thrust_backwards"):
 				velocity -= Vector2(thrust[current_capsule].x, 0).rotated(rotation)
+				thrust_timers[2] = 0.0001
 			if Input.is_action_pressed("thrust_forwards"):
 				velocity += Vector2(thrust[current_capsule].x, 0).rotated(rotation)
+				thrust_timers[0] = 0.0001
 			if Input.is_action_pressed("thrust_ccw"):
 				rot_velocity -= thrust[current_capsule].z
 			if Input.is_action_pressed("thrust_cw"):
 				rot_velocity += thrust[current_capsule].z
+
+		for thruster in range(0,4):
+			if thrust_timers[thruster] > 0:
+				thrusters[current_capsule][thruster].show()
+				thrust_timers[thruster] -= delta
+			else:
+				thrusters[current_capsule][thruster].hide()
+
 
 		if Input.is_action_just_pressed("ui_select"):
 			precision_mode = !precision_mode
