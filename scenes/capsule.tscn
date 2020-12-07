@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/SpaceX Crew Dragon Sprite.png" type="Texture" id=1]
+[ext_resource path="res://scenes/capsule.gd" type="Script" id=2]
+[ext_resource path="res://sprites/Boeing CST-100 Starliner Sprite.png" type="Texture" id=3]
+
+[node name="capsule" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="dragon" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite" type="Sprite" parent="dragon"]
+position = Vector2( 57.667, -25.306 )
+rotation = 0.0785398
+scale = Vector2( 0.18, 0.18 )
+texture = ExtResource( 1 )
+
+[node name="docking_center" type="Node2D" parent="dragon"]
+position = Vector2( 218.88, 0 )
+
+[node name="starliner" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="starliner"]
+rotation = 0.0698132
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 3 )
+
+[node name="docking_center" type="Node2D" parent="starliner"]
+position = Vector2( 146.998, 0 )
