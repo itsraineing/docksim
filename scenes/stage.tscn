@@ -51,3 +51,55 @@ margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="menu" type="Node2D" parent="."]
+
+[node name="initial_menu" type="Node2D" parent="menu"]
+
+[node name="Label" type="Label" parent="menu/initial_menu"]
+margin_left = -95.2441
+margin_top = -247.635
+margin_right = 94.7559
+margin_bottom = -199.635
+text = "Crew Orbital Docking Sim
+by itsraineing
+v0.5"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dragon_button" type="Button" parent="menu/initial_menu"]
+margin_left = -70.6394
+margin_top = -123.817
+margin_right = 70.3606
+margin_bottom = -103.817
+text = "SpaceX Crew Dragon"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="starliner_button" type="Button" parent="menu/initial_menu"]
+margin_left = -83.3386
+margin_top = -76.989
+margin_right = 84.6614
+margin_bottom = -56.989
+text = "Boeing CST-100 Starliner"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exit_button" type="Button" parent="menu/initial_menu"]
+margin_left = -26.6472
+margin_top = 143.587
+margin_right = 27.3528
+margin_bottom = 163.587
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="win_menu" type="Node2D" parent="menu"]
+[connection signal="pressed" from="menu/initial_menu/dragon_button" to="." method="_on_dragon_button_pressed"]
+[connection signal="pressed" from="menu/initial_menu/starliner_button" to="." method="_on_starliner_button_pressed"]
+[connection signal="pressed" from="menu/initial_menu/exit_button" to="." method="_on_exit_button_pressed"]

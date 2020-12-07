@@ -1,17 +1,28 @@
 extends Node2D
 
+var game_running: bool = false
+
 var window_size: Vector2 = Vector2(0, 0)
 var bg_size: Vector2 = Vector2(1920, 1440)
 var window_edge: Vector2 = Vector2(0, 0)
-var sim_edge_margin: Vector2 = Vector2(200, 265)
+var sim_edge_margin: Vector2 = Vector2(176, 188)
 var status_edge_margin: Vector2 = Vector2(20, 20)
 
 func _ready() -> void:
 	get_tree().get_root().connect("size_changed", self, "update_bg")
 	update_bg()
+	$sim/capsule.hide()
+	$status_display.hide()
+	$menu/initial_menu.show()
 
+func start_game(capsule: int) -> void:
+	game_running = true
+	$menu/initial_menu.hide()
+	$sim/capsule.set_capsule(capsule)
+	$sim/capsule.can_control = true
+	$sim/capsule.show()
+	$status_display.show()
 	set_physics_process(true)
-	pass
 
 func update_bg() -> void:
 	window_size = OS.window_size
@@ -63,3 +74,15 @@ func _physics_process(delta: float) -> void:
 		$status_display/precision_label/Label.text = "Precision mode"
 	else:
 		$status_display/precision_label/Label.text = "Coarse mode"
+
+
+func _on_dragon_button_pressed() -> void:
+	start_game(0)
+
+
+func _on_starliner_button_pressed() -> void:
+	start_game(1)
+
+
+func _on_exit_button_pressed() -> void:
+	get_tree().quit()
