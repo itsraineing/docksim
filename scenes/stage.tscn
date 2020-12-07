@@ -63,7 +63,7 @@ margin_right = 94.7559
 margin_bottom = -199.635
 text = "Crew Orbital Docking Sim
 by itsraineing
-v0.5"
+v0.6"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -100,6 +100,78 @@ __meta__ = {
 }
 
 [node name="win_menu" type="Node2D" parent="menu"]
+
+[node name="Label2" type="Label" parent="menu/win_menu"]
+margin_left = -96.0378
+margin_top = -247.635
+margin_right = 96.9622
+margin_bottom = -199.635
+text = "Congradulations! 
+You have successfully docked 
+with the ISS!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="replay_button" type="Button" parent="menu/win_menu"]
+margin_left = -26.9858
+margin_top = -100.006
+margin_right = 27.0142
+margin_bottom = -80.0063
+text = "Replay"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exit_button2" type="Button" parent="menu/win_menu"]
+margin_left = -26.6472
+margin_top = 143.587
+margin_right = 27.3528
+margin_bottom = 163.587
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lose_menu" type="Node2D" parent="menu"]
+
+[node name="Label2" type="Label" parent="menu/lose_menu"]
+margin_left = -96.0378
+margin_top = -247.635
+margin_right = 96.9622
+margin_bottom = -199.635
+text = "Whoops!
+You were going too fast!
+Docking must be at <2m/s"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="replay_button" type="Button" parent="menu/lose_menu"]
+margin_left = -26.9858
+margin_top = -100.006
+margin_right = 27.0142
+margin_bottom = -80.0063
+text = "Replay"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exit_button2" type="Button" parent="menu/lose_menu"]
+margin_left = -26.6472
+margin_top = 143.587
+margin_right = 27.3528
+margin_bottom = 163.587
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="menu/initial_menu/dragon_button" to="." method="_on_dragon_button_pressed"]
 [connection signal="pressed" from="menu/initial_menu/starliner_button" to="." method="_on_starliner_button_pressed"]
 [connection signal="pressed" from="menu/initial_menu/exit_button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="menu/win_menu/replay_button" to="." method="_on_replay_button_pressed"]
+[connection signal="pressed" from="menu/win_menu/exit_button2" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="menu/lose_menu/replay_button" to="." method="_on_replay_button_pressed"]
+[connection signal="pressed" from="menu/lose_menu/exit_button2" to="." method="_on_exit_button_pressed"]
